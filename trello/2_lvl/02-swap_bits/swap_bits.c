@@ -1,10 +1,11 @@
-#include <stdio.h>
+//#include <stdio.h>
 
 unsigned char	swap_bits(unsigned char oct)
 {
 	return ((oct >> 4) | (oct << 4));
 }
-
+/*
+====mthd1
 unsigned char swap_bits(unsigned char octet);
 
 int main(void)
@@ -19,7 +20,7 @@ int main(void)
     return 0;
 }
 
-/*
+====mthd2
 #include <unistd.h>
 
 unsigned char swap_bits(unsigned char octet);
