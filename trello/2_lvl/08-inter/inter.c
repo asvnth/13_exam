@@ -12,7 +12,7 @@ int main(int ac, char **av){
         if (!seen[(unsigned char)*s1]){
             while (*s2 && *s1 != *s2)
                 s2++;
-            if(*s2 == *s1)
+            if(*s2)
                 write(1, s1, 1);
         }
         seen[(unsigned char)*s1] = 1;
