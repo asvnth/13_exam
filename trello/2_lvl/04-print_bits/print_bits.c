@@ -7,3 +7,7 @@ void print_bits(unsigned char oct){
         write(1, &c, 1);
     }
 }
+
+int main(){
+    print_bits('5');
+}
