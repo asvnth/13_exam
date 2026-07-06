@@ -28,8 +28,11 @@ int main(){
     if (!r)
         return (1);
     printf("[");
-    for (int i = 0; i < count; i++)
-        printf("%d, ", r[i]);
-    printf("\b\b]\n");
+    for (int i = 0; i < count; i++){
+        if (i != 0)
+            printf(", ");
+        printf("%d", r[i]);
+    }
+    printf("]\n");
     return (0);
 }
