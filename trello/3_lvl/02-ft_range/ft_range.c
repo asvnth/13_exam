@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 int     *ft_range(int start, int end){
     int count; 
@@ -17,14 +18,15 @@ int     *ft_range(int start, int end){
             r[i] = start - i;
         i++;
     }
+    printf("index = %d\n", i);
     return (r);
 }
 
 #include <stdio.h>
 int main(){
-    int *r = ft_range(4, 2);
+    int *r = ft_range(1, 13);
     int count;
-    count = 4 - 2 + 1;
+    count = 13 - 1 + 1;
     if (!r)
         return (1);
     printf("[");
