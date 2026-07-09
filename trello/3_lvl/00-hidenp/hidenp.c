@@ -1,20 +1,18 @@
 #include <unistd.h>
 
+void hidenp(char *s1, char *s2){
+    while (*s2)
+        if (*s1 == *s2++)
+            s1++;
+    if (*s1 == '\0')
+        write(1, "1", 1);
+    else
+        write(1, "0", 1);
+}
+
 int main(int ac, char **av){
-    if (ac != 3){
-        write(1, "\n", 1);
-        return (0);
-    }
-    int i = 0;
-    int j = 0;
-    while (av[1][i] && av[2][j]){
-        if (av[1][i] == av[2][j])
-            i++;
-        j++;
-    }
-    if (!av[1][i])
-        write(1, "1\n", 2);
-    else 
-        write(1, "0\n", 2);
+    if (ac == 3)
+        hidenp(av[1], av[2]);
+    write(1, "\n", 1);
     return (0);
 }

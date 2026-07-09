@@ -1,31 +1,28 @@
 #include <unistd.h>
 
+void capitalizer(char *s){
+    int i = 0;
+    while (s[i]){
+        if (s[i] >= 'A' && s[i] <= 'Z')
+            s[i] += 32;
+        if ((i == 0 || s[i - 1] == ' ' || s[i - 1] == '\t') 
+                && (s[i] >= 'a' && s[i] <= 'z'))
+            s[i] -= 32;
+        i++;
+    }
+    write(1, s, i);
+    write(1, "\n", 1);
+}
+
 int main(int ac, char **av){
-    if (ac > 1){
-        int start, i = 1, j;
+    if (1 < ac){
+        int i = 1;
         while(i < ac){
-            j = 0;
-            start = 1;
-            while (av[i][j]){
-                if (av[i][j] == ' ' || av[i][j] == '\t')
-                    start = 1;
-                else {
-                    if (start 
-                            && (av[i][j] >= 'a' && av[i][j] <= 'z'))
-                            av[i][j] -= 32;
-                    else if (!start 
-                            && (av[i][j] >= 'A' && av[i][j] <= 'Z'))
-                        av[i][j] += 32;
-                    start = 0;
-                }
-                write(1, &av[i][j], 1);
-                j++;
-            }
+            capitalizer(av[i]);
             i++;
-            if (i < ac)
-            write (1, "\n", 1);
         }
     }
-    write (1, "\n", 1);
+    else 
+        write (1, "\n", 1);
     return (0);
 }

@@ -1,35 +1,28 @@
 #include <unistd.h>
 
-int main(int ac, char **av)
-{
-    int a, i, new_word;
-    char c;
+void rstr_capitalizer(char *s){
+    int i = 0;
+    while (s[i]){
+        if (s[i] >= 'A' && s[i] <= 'Z')
+            s[i] += 32;
+        if((s[i] >= 'a' && s[i] <= 'z') 
+                && (s[i+1]==' ' ||  s[i+1]=='\t' ||  s[i+1]=='\0'))
+            s[i] -= 32;
+        i++;
+    }
+    write (1, s, i);
+    write(1, "\n", 1);
+}
 
-    if (ac == 1)
-        write(1, "\n", 1);
-    a = 1;
-    while (a < ac)
-    {
-        new_word = 1;
-        i = 0;
-        while (av[a][i])
-        {
-            c = av[a][i];
-            if (c == ' ' || c == '\t')
-                new_word = 1;
-            else
-            {
-                if (new_word && c >= 'a' && c <= 'z')
-                    c -= 32;
-                else if (!new_word && c >= 'A' && c <= 'Z')
-                    c += 32;
-                new_word = 0;
-            }
-            write(1, &c, 1);
+int main(int ac,  char **av){
+    int i = 1;
+    if (1 < ac){
+        while (i < ac){
+            rstr_capitalizer(av[i]);
             i++;
         }
-        write(1, "\n", 1);
-        a++;
     }
+    else 
+        write(1, "\n", 1);
     return (0);
 }
