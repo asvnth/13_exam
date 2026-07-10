@@ -15,7 +15,7 @@ int ft_lcm(unsigned int a, unsigned int b){
     }
     return (i);
 }
-
+/*
 void ft_putnbr(int x){
     char c;
     if (x > 9)
@@ -29,4 +29,4 @@ int main(){
     write(1, "\n", 1);
     return (0);
 }
-
+*/
