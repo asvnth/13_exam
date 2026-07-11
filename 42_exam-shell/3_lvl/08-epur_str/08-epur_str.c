@@ -8,16 +8,15 @@ int is_word_char(char c){
 int main(int ac, char **av){
     if (ac == 2){
         int i = 0;
+        int started = 0;
         while (av[1][i]){
-            if ((i) && (i + 1)
-                    && (av[1][i] == ' ' || av[1][i] == '\t')
-                && is_word_char(av[1][i+1]))
+            if (started && (av[1][i] == ' ' || av[1][i] == '\t')
+                    && is_word_char(av[1][i+1]))
                 write(1, &av[1][i], 1);
-            else if ((av[1][i+1] == ' ' || av[1][i+1] == '\t')
-                && is_word_char(av[1][i]))
+            else if (is_word_char(av[1][i])){
                 write(1, &av[1][i], 1);
-            else if (is_word_char(av[1][i]))
-                write(1, &av[1][i], 1);
+                started = 1;
+            }
             i++;
         }
     }
