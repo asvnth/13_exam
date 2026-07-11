@@ -20,17 +20,17 @@ int is_prime(int n){
     int i = 2;
     if (n < 2)
         return (0);
-    while (i < n)
-        if (!(n % i++))
+    while (i * i <= n){
+        if (!(n % i))
             return (0);
+        i++;
+    }
     return (1);
 }
 
 void prime_sum(int n){
     int i = 1;
     int sum = 0;
-    if (n == 1)
-        sum = 1;
     while (++i <= n) 
         if (is_prime(i))
             sum += i;
