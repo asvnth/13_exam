@@ -1,4 +1,4 @@
-int ft_isblank(char c){
+int ft_isblank(unsigned char c){
     while (c <= 32)
         return(1);
     return(0);
