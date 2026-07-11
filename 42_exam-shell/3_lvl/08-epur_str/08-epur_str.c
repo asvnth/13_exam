@@ -1,7 +1,7 @@
 #include <unistd.h>
 
 int is_word_char(char c){
-    return((c >= 'a' && c <= 'z') || (c <= 'A' && c >= 'Z')
+    return((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
             || (c == '\''));
 }
 
