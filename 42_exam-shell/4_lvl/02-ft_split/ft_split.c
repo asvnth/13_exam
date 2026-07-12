@@ -1,10 +1,12 @@
 #include <stdlib.h>
 
-static int count_words(char *str)
+char **ft_split(char *str)
 {
-    int i = 0;
-    int k = 0;
+    char **r;
+    int i, j, k, len;
 
+    k = 0;
+    i = 0;
     while (str[i])
     {
         while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
@@ -14,16 +16,7 @@ static int count_words(char *str)
         while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
             i++;
     }
-    return (k);
-}
-
-char **ft_split(char *str)
-{
-    char **r;
-    int i, j, k, len;
-
-    r = malloc(sizeof(char *) * (count_words(str) + 1));
-    r = malloc(sizeof(char *) * (count_words(str) + 1));
+    r = malloc(sizeof(char *) * (k + 1));
     if (!r)
         return (NULL);
     i = 0;
@@ -39,10 +32,12 @@ char **ft_split(char *str)
                 str[i + len] != '\t' && str[i + len] != '\n')
             len++;
         r[k] = malloc(len + 1);
+        if (!r[k])
+            return (NULL);
         j = 0;
         while (j < len)
             r[k][j++] = str[i++];
-        r[k][j++] = '\0';
+        r[k][j] = '\0';
         k++;
     }
     r[k] = NULL;
@@ -50,16 +45,16 @@ char **ft_split(char *str)
 }
 
 #include <stdio.h>
-int main(){
-    char **r = ft_split("       gg         w           stream       ");
+
+int main(void)
+{
+    char **r = ft_split("gg w stream foo");
     int i = 0;
     printf("[");
-    while (r[i]){
-        printf("\"%s\", ", r[i]);
-        free(r[i]);
-        i++;
-    }
-    printf("\b\b]");
-    free(r);
-    printf("\n");
+    while (r[i])
+        printf("%s, ", r[i++]);
+    printf("\b\b]\n");
+    return (0);
 }
+
+
