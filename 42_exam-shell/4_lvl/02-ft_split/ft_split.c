@@ -1,21 +1,48 @@
 #include <stdlib.h>
 
-char **ft_split(char *str){
-    char **r;
+static int count_words(char *str)
+{
     int i = 0;
-    if (!(r = (char **)malloc(sizeof(char *) * (2048))))
-        return (NULL);
-    while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
-        i++;
-    int j = 0;
     int k = 0;
-    while (str[i]){
-        j = 0;
-        while (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
-            r[k][j++] = str[i++];
+
+    while (str[i])
+    {
         while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
             i++;
-        r[k][j] = '\0';
+        if (str[i])
+            k++;
+        while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
+            i++;
+    }
+    return (k);
+}
+
+char **ft_split(char *str)
+{
+    char **r;
+    int i, j, k, len;
+
+    r = malloc(sizeof(char *) * (count_words(str) + 1));
+    r = malloc(sizeof(char *) * (count_words(str) + 1));
+    if (!r)
+        return (NULL);
+    i = 0;
+    k = 0;
+    while (str[i])
+    {
+        while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+            i++;
+        if (!str[i])
+            break;
+        len = 0;
+        while (str[i + len] && str[i + len] != ' ' &&
+                str[i + len] != '\t' && str[i + len] != '\n')
+            len++;
+        r[k] = malloc(len + 1);
+        j = 0;
+        while (j < len)
+            r[k][j++] = str[i++];
+        r[k][j++] = '\0';
         k++;
     }
     r[k] = NULL;
@@ -24,9 +51,15 @@ char **ft_split(char *str){
 
 #include <stdio.h>
 int main(){
-    char **s = ft_split("hksd kjfdsf");
+    char **r = ft_split("       gg         w           stream       ");
     int i = 0;
-    while (s[i])
-        printf ("%s\n", s[i++]);
-    return (0);
+    printf("[");
+    while (r[i]){
+        printf("\"%s\", ", r[i]);
+        free(r[i]);
+        i++;
+    }
+    printf("\b\b]");
+    free(r);
+    printf("\n");
 }
