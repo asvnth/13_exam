@@ -1,0 +1,21 @@
+char **str_split(const char *s, char delim) {
+    int n = 1;
+    for (const char *p = s; *p; p++) if (*p == delim) n++;
+
+    char **out = malloc((n + 1) * sizeof(char *));
+    int i = 0;
+    const char *start = s;
+    for (const char *p = s; ; p++) {
+        if (*p == delim || *p == '\0') {
+            int len = p - start;
+            out[i] = malloc(len + 1);
+            memcpy(out[i], start, len);
+            out[i][len] = '\0';
+            i++;
+            start = p + 1;
+            if (*p == '\0') break;
+        }
+    }
+    out[i] = NULL;
+    return out;
+}
