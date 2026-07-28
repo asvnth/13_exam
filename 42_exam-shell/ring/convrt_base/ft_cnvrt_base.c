@@ -1,23 +1,28 @@
-char *ft_convert_base(char *nbr, char *base_from, char *base_to) {
-    int from = strlen(base_from), to = strlen(base_to);
-    long n = 0;
-    int neg = (*nbr == '-');
-    if (neg) nbr++;
-    for (; *nbr; nbr++)
-        n = n * from + (strchr(base_from, *nbr) - base_from);
+char **ft_split(char *str, char *charset) {
+    int is_delim(char c) { return strchr(charset, c) != NULL; }
 
-    char tmp[65];
-    char *p = tmp + 64;
-    *p = '\0';
-    long v = neg ? -n : n;
-    if (v < 0) v = -v;
-    do {
-        *--p = base_to[v % to];
-        v /= to;
-    } while (v);
-    if (neg) *--p = '-';
+    int count = 0, in_word = 0;
+    for (char *p = str; *p; p++) {
+        if (!is_delim(*p) && !in_word) { count++; in_word = 1; }
+        else if (is_delim(*p)) in_word = 0;
+    }
 
-    char *r = malloc(strlen(p) + 1);
-    if (r) strcpy(r, p);
-    return r;
+    char **out = malloc((count + 1) * sizeof(char *));
+    if (!out) return NULL;
+
+    int idx = 0;
+    char *p = str;
+    while (*p) {
+        while (*p && is_delim(*p)) p++;
+        if (!*p) break;
+        char *start = p;
+        while (*p && !is_delim(*p)) p++;
+        int len = p - start;
+        out[idx] = malloc(len + 1);
+        memcpy(out[idx], start, len);
+        out[idx][len] = '\0';
+        idx++;
+    }
+    out[count] = NULL;
+    return out;
 }
