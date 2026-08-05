@@ -9,7 +9,7 @@ int main(int ac, char **av){
 		if (av[1][i] == '(' || av[1][i] == '{' || av[1][i] == '[')
 			stack[top++] = av[1][i];
 		else if (av[1][i] == ')' || av[1][i] == ']' || av[1][i] == '}'){
-			if (top == 0 || !((av[1][i] == ')' && (stack[top - 1] == '(')) 
+			if (!top || !((av[1][i] == ')' && (stack[top - 1] == '(')) 
 					|| (av[1][i] == ']' && (stack[top - 1] == '['))
 					|| (av[1][i] == '}' && (stack[top - 1] == '{')))){
 						write(1, "0\n", 2);
