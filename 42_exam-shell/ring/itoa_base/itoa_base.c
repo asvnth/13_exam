@@ -5,7 +5,7 @@ char *itoa_base(int val, int base){
     int len = (n <= 0) ? 1 : 0;
     if (base < 2 || base > 16)
         return NULL;
-    if (n < 0 && base)
+    if (n < 0 && base != 10)
         n = (unsigned int)val;
     int tmp = n;
     if (!tmp)
