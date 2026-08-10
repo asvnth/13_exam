@@ -10,6 +10,6 @@ int clim(int n){
 #include <stdio.h>
 int main() {
     int n = 10;
-    printf("Ways to climb %d stairs: %d\n", n, clim(n));
+    printf("ways to climb %d stairs: %d\n", n, clim(n));
     return 0;
 }
